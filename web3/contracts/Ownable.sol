@@ -2,7 +2,7 @@
 pragma solidity ^0.8.9;
 
 // importing CONTRACT
-import "./context.sol";
+import "./Context.sol";
 
 abstract contract Ownable is Context {
     address private _owner;

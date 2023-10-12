@@ -38,8 +38,15 @@ library Address {
         uint256 value,
         string memory errorMessage
      ) internal returns (bytes memory) {
-        require(address(this).balance>=value, "Address: insufficient balance for call");
+        require(address(this).balance >= value, "Address: insufficient balance for call");
         require(isContract(target), "Address: call to non-contract");
+
+        (bool success, bytes memory returndata) = target.call{value: value}(data);
+        return verifyCallResult(success, returndata, errorMessage);
+    }
+    
+    function functionStaticCall(address target, bytes memory data) internal view returns (bytes memory) {
+        return functionStaticCall(target, data, "Address: low-level static call failed");
     }
 
     function functionStaticCall (

@@ -1,11 +1,11 @@
 //FUNCTION CALL
 loadInitialData("sevenDays");
 connectMe("metamask_wallet");
-function connectWallte() {}
+function connectWallet() {}
 
-function openTab(event, name) {
+function openTab(_event, name) {
     console.log(name);
-    contarctCall = name;
+    contractCall = name;
     getSelectedTab(name);
     loadInitialData(name);
 }
@@ -39,25 +39,28 @@ async function loadInitialData(sClass) {
         let userDetailBal = userDetail.stakeAmount / 10 ** 18;
 
         document.getElementById(
+            "total-locked-user-token"
+        ).innerHTML = `${userDetailBal}`;
+
+        //ELEMENT - ID
+        document.getElementById(
             "num-of-stackers-value"
         ).innerHTML= `${totalUsers}`;
         document.getElementById("apy-value-feature").innerHTML = `${cAPY} %`;
 
         // class element data
-        let totalLockedTokens = await cObj.methods.getTotalStakedTokens().call();
-        let earlyunstskeFee = await cObj.methods
-        .getEarlyUnstakeFeePercentage()
-        .call();
+        let totalStakedTokens = await cObj.methods.getTotalStakedTokens().call();
+        let earlyUnStakeFee = await cObj.methods.getEarlyUnStakeFeePercentage().call();
 
         //ELEMENTS --CLASS
         document.getElementById("total-locked-tokens-value").innerHTML = `${
-            totalLockedTokens / 10 ** 18
+            totalStakedTokens / 10 ** 18
         } ${SELECT_CONTRACT[_NETWORK_ID].TOKEN.symbol}`;
 
         document 
             .querySelectorAll(".early-unstake-fee-value")
             .forEach(function (element) {
-                element.innerHTML = `${earlyUnstakeFee / 100}%`;
+                element.innerHTML = `${earlyUnStakeFee / 100}%`;
             });
 
             let minStakeAmount = await cObj.methods.getMinimumStakingAmount().call();
@@ -77,10 +80,11 @@ async function loadInitialData(sClass) {
             .forEach(function (element) {
                 element.innerHTML = `${minA}`;
             });
+
             document 
-            .querySelectorAll(".maximum-Staking-Amount")
+            .querySelectorAll(".Maximum-Staking-Amount")
             .forEach(function (element) {
-                element.innerHTML = `${(10000000).toLocaleString()} ${
+                element.innerHTML = `${(5000).toLocaleString()} ${
                     SELECT_CONTRACT[_NETWORK_ID].TOKEN.symbol
                 }`;
             });
@@ -88,7 +92,7 @@ async function loadInitialData(sClass) {
             let isStakingPaused = await cObj.methods.getStakingStatus().call();
             let isStakingPausedText;
 
-            let StartDate = await cObj.methods.getStakeStartDate().call();
+            let startDate = await cObj.methods.getStakeStartDate().call();
             startDate = Number(startDate) * 1000;
 
             let endDate = await cObj.methods.getStakeEndDate().call();
@@ -99,8 +103,9 @@ async function loadInitialData(sClass) {
             let days = Math.floor(Number(stakeDays) / (3600 * 24));
 
             let dayDisplay = days > 0 ? days + (days == 1 ? "day, ": "days, ") : "";
+            
             document.querySelectorAll(".Lock-period-value").forEach(function (element) {
-                element.innerHTML = `${daysDisplay}`;
+                element.innerHTML = `${dayDisplay}`;
             });
 
             let rewardBal = await cObj.methods
@@ -118,14 +123,17 @@ async function loadInitialData(sClass) {
 
             balMainUser = Number(balMainUser) / 10 ** 18;
 
-            document.getElementById("user-token-balance").innerHTML = `Balance: ${balMainUser}`;
+            document.getElementById(
+                "user-token-balance"
+            ).innerHTML = `Balance: ${balMainUser}`;
+            
             let currentDate = new Date().getTime();
 
             if (isStakingPaused) {
-                isStakingpausedText = "paused";
+                isStakingPausedText = "paused";
             } else if (currentDate < startDate) {
                 isStakingPausedText = "Locked";
-            } else if (currentDate > enddate) {
+            } else if (currentDate > endDate) {
                 isStakingPausedText = "Ended";
             } else {
                 isStakingPausedText = "Active";
@@ -141,19 +149,19 @@ async function loadInitialData(sClass) {
                 const ele = document.getElementById("countdown-time-value");
                 generateCountDown(ele, endDate);
 
-                document.getElementById("countdown-title-value").innerHTML = `Staking Ends In`;
+                document.getElementById(
+                    "countdown-title-value"
+                ).innerHTML = `Staking Ends In`;
             }
 
             if (currentDate < startDate) {
                 const ele = document.getElementById("countdown-time-value");
                 generateCountDown(ele, endDate);
 
-                document.getElementById("countdown-title-value").innerHTML = `Staking Starts In`;
+                document.getElementById(
+                    "countdown-title-value"
+                ).innerHTML = `Staking Starts In`;
             }
-
-            document.querySelectorAll(".apy-value").forEach(function (element) {
-                element.innerHTML = `${cAPY}%`;
-            });
     } catch (error) {
         console.log(error);
         notyf.error(
@@ -163,9 +171,9 @@ async function loadInitialData(sClass) {
 }
 
 function generateCountDown(ele, claimDate) {
-    clearInterval(countDownGLobal);
+    clearInterval(countDownGlobal);
     // set the date we are counting down to
-    var countDowndate = new Date(claimDate).getTime();
+    var countDownDate = new Date(claimDate).getTime();
 
     //update the count down every 1 second
     countDownGlobal = setInterval(function() {
@@ -175,11 +183,9 @@ function generateCountDown(ele, claimDate) {
         //find distance between now and the count down date
         var distance = countDownDate - now;
 
-        // time clacylations for days, hours, minutes and seconds
-        var days = Math.floor(distance/(1000*60*60*24));
-        var hours = Math.floor(
-            (distance % (1000 * 60 * 60 *24)) / (1000 * 60 * 60)
-        );
+        // time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutes = Math.floor((distance % (1000 * 60 * 60))/ (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
@@ -191,7 +197,7 @@ function generateCountDown(ele, claimDate) {
         // if the count down is finished, write some text
         if(distance < 0) {
             clearInterval(countDownGlobal);
-            ele.html("Refresh Page");
+            ele.innerHTML("Refresh Page");
         }
     }, 1000);
 } 
@@ -243,7 +249,7 @@ async function stackTokens() {
                     return;
                 }
 
-                let sClass = getSelectedTab(contarctCall);
+                let sClass = getSelectedTab(contractCall);
                 console.log(sClass);
                 let balMainAllowance = await oContractToken.methods
                 .allowance(
@@ -388,7 +394,7 @@ async function unStackTokens() {
 
         let tokenToTransfer = addDecimal(nTokens, 18);
 
-        let sClass = getSelectedTab(contarctCall);
+        let sClass = getSelectedTab(contractCall);
         let oContractStacking = getContractObj(sClass);
 
         let balMainUser = await oContractStacking.methods
@@ -479,17 +485,17 @@ async function unstackTokenMain(_amount_wel, oContractStacking, sClass) {
 
 async function claimTokens() {
     try {
-        let sClass = getSelectedTab(contarctCall);
+        let sClass = getSelectedTab(contractCall);
         let oContractStacking = getContractObj(sClass);
 
-        let rewaedBal = await oContractStacking.methods
+        let rewardBal = await oContractStacking.methods
         .getUserEstimatedRewards()
         .call({from: currentAddress});
-        rewardsBal = Number(rewaedBal);
+        rewardBal = Number(rewardBal);
 
-        console.log("rewardsBal", rewardBal);
+        console.log("rewardBal", rewardBal);
 
-        if(!rewaedBal) {
+        if(!rewardBal) {
             notyf.dismiss(notification);
             notyf.error(`Insufficient reward tokens to claim`);
             return;
@@ -538,12 +544,12 @@ async function claimTokenMain(oContractStacking, sClass) {
                 type: receipt.type,
             };
 
-            let tramsactionHistory = [];
+            let transactionHistory = [];
 
             const allUserTransaction = localStorage.getItem("transactions");
             if(allUserTransaction) {
                 transactionHistory = JSON.parse(localStorage.getItem("transactions"));
-                tramsactionHistory.push(receiptObj);
+                transactionHistory.push(receiptObj);
                 localStorage.setItem(
                     "transactions",
                     JSON.stringify(transactionHistory)
@@ -552,7 +558,7 @@ async function claimTokenMain(oContractStacking, sClass) {
                 transactionHistory.push(receiptObj);
                 localStorage.setItem(
                     "transactions",
-                    JSON.stringify(tramsactionHistory)
+                    JSON.stringify(transactionHistory)
                 );
             }
 
