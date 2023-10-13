@@ -5,11 +5,12 @@ SELECT_CONTRACT[_NETWORK_ID] = {
   network_name: "Polygon Mumbai",
   explorer_url: "https://mumbai.polygonscan.com/",
   STACKING: {
-    sevenDays: { //0x1A79beD21B6A5c4ddc575aE1BeBB930B9616383a
-      address: "0x1A79beD21B6A5c4ddc575aE1BeBB930B9616383a", //new
+    sevenDays: {
+      //0xe39CE7e706E2A8F4e5777Fb6C024264CFfB098aC
+      address: "0xe39CE7e706E2A8F4e5777Fb6C024264CFfB098aC", //new
     },
     tenDays: {
-      address: "0x0a065D6A9aF93896C34731B501599602C9DDfAE1",
+      address: "0xf8b140D8B954d2Bbb65c18b6137A0F129A96D64A",
     },
     thirtyTwoDays: {
       address: "0xD4623098a915D254810dc9E8f210733E4100ebab",
@@ -586,7 +587,7 @@ SELECT_CONTRACT[_NETWORK_ID] = {
   },
   TOKEN: {
     symbol: "TBC",
-    address: "0xc16a91B643F9728dE8D48FeaCd2CcEBA4A86f3A1", //new
+    address: "0xbD812Ffdf6190D22Fd8d05B036EF650d0035D93b", //new
     abi: [
       {
         inputs: [],
@@ -678,6 +679,30 @@ SELECT_CONTRACT[_NETWORK_ID] = {
           },
         ],
         stateMutability: "view",
+        type: "function",
+      },
+      {
+        inputs: [
+          {
+            internalType: "address",
+            name: "_spender",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "_value",
+            type: "uint256",
+          },
+        ],
+        name: "approve",
+        outputs: [
+          {
+            internalType: "bool",
+            name: "success",
+            type: "bool",
+          },
+        ],
+        stateMutability: "nonpayable",
         type: "function",
       },
       {

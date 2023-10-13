@@ -191,7 +191,7 @@ function generateCountDown(ele, claimDate) {
 
         // display the result in the element with id = "demo"
         ele.innerHTML =
-        days + "d" + hours + "h" + minutes + "m" + seconds + "s";
+        days + "d " + hours + "h " + minutes + "m " + seconds + "s";
         //ele.html(days+"d"+hours+"h"+minutes+"m"+seconds+"s");
         
         // if the count down is finished, write some text
