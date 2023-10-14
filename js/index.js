@@ -258,7 +258,7 @@ async function stackTokens() {
                 )
                 .call();
 
-                if (Number[balMainAllowance] < Number(tokenToTransfer)) {
+                if (Number(balMainAllowance) < Number(tokenToTransfer)) {
                     approveTokenSpend(tokenToTransfer, sClass);
                 } else {
                     stackTokenMain(tokenToTransfer, sClass);
@@ -270,14 +270,14 @@ async function stackTokens() {
             }
         }
 
-async function approveTokenSpend(_mint_fee_wel, sClass) {
+async function approveTokenSpend(_mint_fee_wei, sClass) {
     let gasEstimation;
 
     try {
         gasEstimation = await oContractToken.methods
         .approve(
             SELECT_CONTRACT[_NETWORK_ID].STACKING[sClass].address,
-            _mint_fee_wel
+            _mint_fee_wei
         )
         .estimateGas({
             from: currentAddress,
@@ -291,7 +291,7 @@ async function approveTokenSpend(_mint_fee_wel, sClass) {
     oContractToken.methods
     .approve(
         SELECT_CONTRACT[_NETWORK_ID].STACKING[sClass].address,
-        _mint_fee_wel
+        _mint_fee_wei
     )
     .send({
         from: currentAddress,
@@ -302,7 +302,7 @@ async function approveTokenSpend(_mint_fee_wel, sClass) {
     })
     .on("receipt", (receipt) => {
         console.log(receipt);
-        stackTokenMain(_mint_fee_wel);
+        stackTokenMain(_mint_fee_wei);
     })
     .catch((error) => {
         console.log(error);
@@ -311,14 +311,14 @@ async function approveTokenSpend(_mint_fee_wel, sClass) {
     });
 }
 
-async function stackTokenMain(_amount_wel, sClass) {
+async function stackTokenMain(_amount_wei, sClass) {
     let gasEstimation;
 
     let oContractStacking = getContractObj(sClass);
 
     try {
         gasEstimation = await oContractStacking.methods
-        .stake(_amount_wel)
+        .stake(_amount_wei)
         .estimateGas({
             from: currentAddress,
         });
@@ -329,7 +329,7 @@ async function stackTokenMain(_amount_wel, sClass) {
     }
 
     oContractStacking.methods
-    .stake(_amount_wel)
+    .stake(_amount_wei)
     .send({
         from: currentAddress,
         gas: gasEstimation, 
@@ -337,7 +337,7 @@ async function stackTokenMain(_amount_wel, sClass) {
     .on("receipt", (receipt) => {
         console.log(receipt);
         const receiptObj = {
-            token: _amount_wel,
+            token: _amount_wei,
             from: receipt.from,
             to: receipt.to,
             blockHash: receipt.blockHash,
@@ -368,7 +368,7 @@ async function stackTokenMain(_amount_wel, sClass) {
         }
 
         console.log(allUserTransaction);
-        window.location.href = "https://127.0.0.1:5500/analytic.html";
+        window.location.href = "https://127.0.0.1:5500/token-stacking-dapp-starter-file/analytic.html";
     })
 
     .catch((error) => {
@@ -418,11 +418,11 @@ async function unStackTokens() {
     }
 }
 
-async function unstackTokenMain(_amount_wel, oContractStacking, sClass) {
+async function unstackTokenMain(_amount_wei, oContractStacking, sClass) {
     let gasEstimation;
     try {
         gasEstimation = await oContractStacking.methods
-        .unstake(_amount_wel)
+        .unstake(_amount_wei)
         .estimateGas({
             from: currentAddress,
         });
@@ -433,7 +433,7 @@ async function unstackTokenMain(_amount_wel, oContractStacking, sClass) {
     }
 
     oContractStacking.methods
-    .unstake(_amount_wel)
+    .unstake(_amount_wei)
     .send({
         from: currentAddress,
         gas: gasEstimation,
@@ -441,7 +441,7 @@ async function unstackTokenMain(_amount_wel, oContractStacking, sClass) {
     .on("receipt", (receipt) => {
         console.log(receipt);
         const receiptObj = {
-            token: _amount_wel,
+            token: _amount_wei,
             from: receipt.from,
             to: receipt.to,
             blockHash: receipt.blockHash,
@@ -471,7 +471,7 @@ async function unstackTokenMain(_amount_wel, oContractStacking, sClass) {
             );
         } 
 
-        window.location.href= "https://127.0.0.1.5500/analytic.html";
+        window.location.href= "https://127.0.0.1:5500/token-stacking-dapp-starter-file/analytic.html";
     })
     .on("transactionHash", (hash) => {
         console.log("transactionHash", hash);
@@ -562,7 +562,7 @@ async function claimTokenMain(oContractStacking, sClass) {
                 );
             }
 
-            window.location.href= "https://127.0.0.1.5500/analytic.html";
+            window.location.href= "https://127.0.0.1:5500/token-stacking-dapp-starter-file/analytic.html";
     })
     .on("transactionHash", (hash) => {
         console.log("transactionHash", hash);

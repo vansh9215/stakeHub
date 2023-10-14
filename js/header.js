@@ -7,16 +7,16 @@ SELECT_CONTRACT[_NETWORK_ID] = {
   STACKING: {
     sevenDays: {
       //0xe39CE7e706E2A8F4e5777Fb6C024264CFfB098aC
-      address: "0xe39CE7e706E2A8F4e5777Fb6C024264CFfB098aC", //new
+      address: "0x7af118E59aDdd0Fe9c83fa5bD089f46998776D01", //new
     },
     tenDays: {
-      address: "0xf8b140D8B954d2Bbb65c18b6137A0F129A96D64A",
+      address: "0x8eeBc6e9F7144A4C1363006f3aDaC1a06A82dfB4",
     },
     thirtyTwoDays: {
-      address: "0xD4623098a915D254810dc9E8f210733E4100ebab",
+      address: "0x66b58c9AF0D44D70826dF26E873B381e0dc4Ef03",
     },
     ninetyDays: {
-      address: "0x4aafc4309Decf7Fc9cBD560a9c65A0052486f97b",
+      address: "0x2D5E84Ce41ba1838731b33D8123b5b696B62A0FD",
     },
     abi: [
       {
