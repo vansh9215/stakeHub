@@ -27,14 +27,14 @@ async function loadInitialData(sClass) {
         let userDetail = await cObj.methods.getUser(currentAddress).call();
 
         const user = {
+            stakeAmount: userDetail.stakeAmount,
             lastRewardCalculationTime: userDetail.lastRewardCalculationTime,
             lastStakeTime: userDetail.lastStakeTime,
             rewardAmount: userDetail.rewardAmount,
             rewardClaimedSoFar: userDetail.rewardClaimedSoFar,
-            stakeAmount: userDetail.stakeAmount,
             address: currentAddress,
         };
-        localStorage.setItem("User", JSON.stringify(user));
+        localStorage.setItem("user", JSON.stringify(user));
 
         let userDetailBal = userDetail.stakeAmount / 10 ** 18;
 

@@ -1,8 +1,8 @@
 const userTransaction = JSON.parse(localStorage.getItem("transactions"));
-const user= JSON.parse(localStorage.getItem("User"));
+const User= JSON.parse(localStorage.getItem("User"));
 
 console.log(userTransaction);
-console.log(user);
+console.log(User);
 
 function generateCountDown() {
     var now=new Date().getDate();
@@ -10,11 +10,11 @@ function generateCountDown() {
     var minutes=Math.floor((now % (1000*60*60))/(1000*60));
     var seconds=Math.floor((now % (1000*60))/1000);
 
-    return minutes + "m" + seconds + "s";
+    return minutes + "m " + seconds + "s";
 }
 
 const contractTransactionList = document.querySelector(".dataUserTransaction");
-const userProfile=document.querySelector(".contract-user");
+const UserProfile=document.querySelector(".contract-user");
 
 const userTransactionHistory= userTransaction.map((transaction, i) => {
     return `
@@ -91,15 +91,15 @@ const userProfileHTML = `
 <div class="contract-user-profile">
               <img src="assets/img/content/team_1.png" alt=""/>
               <div class="contract-user-profile-info">
-                <p><strong>Address: </strong>${user.address.slice(0,25)}..</p>
-                <span class="contract-space"><strong>lastRewardCalculationTime: </strong>${generateCountDown(user.lastRewardCalculationTime)}</span>
-                <span class="contract-space"><strong>lastStakeTime: </strong>${generateCountDown(user.lastStakeTime)}</span>
-                <span class="contract-space"><strong>rewardAmount: </strong>${user.rewardClaimedSoFar / 10**18}</span>
-                <span class="contract-space"><strong>rewardClaimedSoFar: </strong>${user.rewardClaimedSoFar / 10**18}</span>
-                <span class="contract-space"><strong>stakeAmount: </strong>${user.stakeAmount / 10**18}</span>
+                <p><strong>Address: </strong>${User.address.slice(0,45)}</p>
+                <span class="contract-space"><strong>stakeAmount: </strong>${User.stakeAmount / 10**18}</span>
+                <span class="contract-space"><strong>lastRewardCalculationTime:&nbsp; </strong>${generateCountDown(User.lastRewardCalculationTime)}</span>
+                <span class="contract-space"><strong>lastStakeTime:&nbsp; </strong>${generateCountDown(User.lastStakeTime)}</span>
+                <span class="contract-space"><strong>rewardAmount:&nbsp; </strong>${User.rewardAmount / 10**18}</span>
+                <span class="contract-space"><strong>rewardClaimedSoFar:&nbsp; </strong>${User.rewardClaimedSoFar / 10**18}</span>
                 <p class="contract-paragraph">Welcome to our Project</p>
               </div>
             </div>`;
 
-userProfile.innerHTML = userProfileHTML;
+UserProfile.innerHTML = userProfileHTML;
 contractTransactionList.innerHTML = userTransactionHistory;
