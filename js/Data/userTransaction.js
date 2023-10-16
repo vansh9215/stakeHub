@@ -22,7 +22,7 @@ const userTransactionHistory= userTransaction.map((transaction, i) => {
             <div class="card project-card">
               <div class="media">
                 <a href="project-details.html">
-                  <img src="assets/img/content/thumb_${i+1}" alt="" class="card-img-top avatar-max-lg"/>
+                  <img src="assets/img/content/thumb_${i+1}.png" alt="" class="card-img-top avatar-max-lg"/>
                 </a>
                 <div class="media-body ml-4">
                   <a href="project-details.html">
@@ -39,8 +39,8 @@ const userTransactionHistory= userTransaction.map((transaction, i) => {
               <div class="card-body">
         <div class="items">
           <div class="single-item">
-            <span>${transaction.token / 10 **18?"Amount":"Claim Token"}</span>
-            <span>${transaction.token / 10**18 || ""}</span>
+            <span>${transaction.token / 10 ** 18 ? "Amount" : "Claim Token"}</span>
+            <span>${transaction.token / 10 ** 18 || ""}</span>
           </div>
 
           <div class="single-item">
@@ -84,22 +84,22 @@ const userTransactionHistory= userTransaction.map((transaction, i) => {
                 <img src="assets/img/content/ethereum.png" alt="" />
               </div>
             </div>
-          </div>`
-})
+          </div>`;
+});
 
 const userProfileHTML = `
 <div class="contract-user-profile">
               <img src="assets/img/content/team_1.png" alt=""/>
               <div class="contract-user-profile-info">
                 <p><strong>Address: </strong>${user.address.slice(0,45)}</p>
-                <span class="contract-space"><strong>stakeAmount: </strong>${user.stakeAmount / 10 ** 18}</span>
+                <span class="contract-space"><strong>stakeAmount:&nbsp; </strong>${user.stakeAmount / 10 ** 18}</span>
                 <span class="contract-space"><strong>lastRewardCalculationTime:&nbsp; </strong>${generateCountDown(user.lastRewardCalculationTime)}</span>
                 <span class="contract-space"><strong>lastStakeTime:&nbsp; </strong>${generateCountDown(user.lastStakeTime)}</span>
-                <span class="contract-space"><strong>rewardAmount:&nbsp; </strong>${user.rewardAmount / 10**18}</span>
-                <span class="contract-space"><strong>rewardClaimedSoFar:&nbsp; </strong>${user.rewardClaimedSoFar / 10**18}</span>
+                <span class="contract-space"><strong>rewardAmount:&nbsp; </strong>${user.rewardAmount / 10 ** 18}</span>
+                <span class="contract-space"><strong>rewardsClaimedSoFar:&nbsp; </strong>${user.rewardsClaimedSoFar / 10 ** 18}</span>
                 <p class="contract-paragraph">Welcome to our Project</p>
               </div>
             </div>`;
 
-UserProfile.innerHTML = userProfileHTML;
 contractTransactionList.innerHTML = userTransactionHistory;
+UserProfile.innerHTML = userProfileHTML;

@@ -31,7 +31,7 @@ async function loadInitialData(sClass) {
             lastRewardCalculationTime: userDetail.lastRewardCalculationTime,
             lastStakeTime: userDetail.lastStakeTime,
             rewardAmount: userDetail.rewardAmount,
-            rewardClaimedSoFar: userDetail.rewardClaimedSoFar,
+            rewardsClaimedSoFar: userDetail.rewardsClaimedSoFar,
             address: currentAddress,
         };
         localStorage.setItem("user", JSON.stringify(user));
