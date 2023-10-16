@@ -368,7 +368,7 @@ async function stackTokenMain(_amount_wei, sClass) {
         }
 
         console.log(allUserTransaction);
-        window.location.href = "https://127.0.0.1:5500/token-stacking-dapp-starter-file/analytic.html";
+        window.location.href = "analytic.html";
     })
 
     .catch((error) => {
@@ -471,7 +471,7 @@ async function unstackTokenMain(_amount_wei, oContractStacking, sClass) {
             );
         } 
 
-        window.location.href= "https://127.0.0.1:5500/token-stacking-dapp-starter-file/analytic.html";
+        window.location.href= "analytic.html";
     })
     .on("transactionHash", (hash) => {
         console.log("transactionHash", hash);
@@ -562,7 +562,7 @@ async function claimTokenMain(oContractStacking, sClass) {
                 );
             }
 
-            window.location.href= "https://127.0.0.1:5500/token-stacking-dapp-starter-file/analytic.html";
+            window.location.href= "analytic.html";
     })
     .on("transactionHash", (hash) => {
         console.log("transactionHash", hash);

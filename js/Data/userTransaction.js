@@ -1,8 +1,8 @@
 const userTransaction = JSON.parse(localStorage.getItem("transactions"));
-const User= JSON.parse(localStorage.getItem("User"));
+const user= JSON.parse(localStorage.getItem("User"));
 
 console.log(userTransaction);
-console.log(User);
+console.log(user);
 
 function generateCountDown() {
     var now=new Date().getDate();
@@ -91,12 +91,12 @@ const userProfileHTML = `
 <div class="contract-user-profile">
               <img src="assets/img/content/team_1.png" alt=""/>
               <div class="contract-user-profile-info">
-                <p><strong>Address: </strong>${User.address.slice(0,45)}</p>
-                <span class="contract-space"><strong>stakeAmount: </strong>${User.stakeAmount / 10**18}</span>
-                <span class="contract-space"><strong>lastRewardCalculationTime:&nbsp; </strong>${generateCountDown(User.lastRewardCalculationTime)}</span>
-                <span class="contract-space"><strong>lastStakeTime:&nbsp; </strong>${generateCountDown(User.lastStakeTime)}</span>
-                <span class="contract-space"><strong>rewardAmount:&nbsp; </strong>${User.rewardAmount / 10**18}</span>
-                <span class="contract-space"><strong>rewardClaimedSoFar:&nbsp; </strong>${User.rewardClaimedSoFar / 10**18}</span>
+                <p><strong>Address: </strong>${user.address.slice(0,45)}</p>
+                <span class="contract-space"><strong>stakeAmount: </strong>${user.stakeAmount / 10 ** 18}</span>
+                <span class="contract-space"><strong>lastRewardCalculationTime:&nbsp; </strong>${generateCountDown(user.lastRewardCalculationTime)}</span>
+                <span class="contract-space"><strong>lastStakeTime:&nbsp; </strong>${generateCountDown(user.lastStakeTime)}</span>
+                <span class="contract-space"><strong>rewardAmount:&nbsp; </strong>${user.rewardAmount / 10**18}</span>
+                <span class="contract-space"><strong>rewardClaimedSoFar:&nbsp; </strong>${user.rewardClaimedSoFar / 10**18}</span>
                 <p class="contract-paragraph">Welcome to our Project</p>
               </div>
             </div>`;
